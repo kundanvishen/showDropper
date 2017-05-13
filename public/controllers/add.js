@@ -1,4 +1,4 @@
-angluar.module(MyApp)
+angular.module('MyApp')
     .controller('AddCtrl', ['$scope', '$alert', 'Show', function($scope, $alert, Show) {
         $scope.addShow = function() {
             Show.save({ showName: $scope.showName },
@@ -6,13 +6,13 @@ angluar.module(MyApp)
                     $scope.showName = '';
                     $scope.addForm.$setPristine();
                     $alert({
-                        content: 'TV Show has been added',
+                        content: 'TV show has been added.',
                         placement: 'top-right',
                         type: 'success',
                         duration: 3
                     });
                 },
-                function($response) {
+                function(response) {
                     $scope.showName = '';
                     $scope.addForm.$setPristine();
                     $alert({
