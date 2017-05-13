@@ -119,6 +119,9 @@ app.post('/api/shows', function(req, res, next) {
         explicitArray: false,
         normalizeThings: true
     });
+
+    // normalize all tags to lowercase and disable
+    // conversion to arrays when there is only one child element
     var seriesName = req.body.showName
         .toLowerCase()
         .replace(/ /g, '_')
