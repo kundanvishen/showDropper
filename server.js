@@ -21,6 +21,9 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var _ = require('lodash');
 
+var mongoConnectionString = CONFIG.MONGO_CONNECTION_STRING;
+var agenda = require('agenda')({ db: { address: mongoConnectionString } });
+
 var showSchema = new mongoose.Schema({
     _id: Number,
     name: String,
@@ -103,7 +106,9 @@ function ensureAuthenticated(req, res, next) {
     else res.send(401);
 }
 
-mongoose.connect('localhost');
+
+// mongoose.connect('localhost');
+mongoose.connect(mongoConnectionString);
 
 var app = express();
 
@@ -154,7 +159,7 @@ app.get('/api/shows', function(req, res, next) {
     if (req.query.genre) {
         query.where({ genre: req.query.genre });
     } else if (req.query.alphabet) {
-        query.where({ name: new RegExp('^' + '[' + req.query.alphabet + ']', i) });
+        query.where({ name: new RegExp('^' + '[' + req.query.alphabet + ']', 'i') });
     } else {
         query.limit(12);
     }

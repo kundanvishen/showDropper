@@ -1,3 +1,4 @@
 {
-    "TVDB_API_KEY": "xxxx"
+    "TVDB_API_KEY": "xxxx",
+    "MONGO_CONNECTION_STRING": "mongodb://user:password@mongoserviceurl:37759/showdropper"
 }

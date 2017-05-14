@@ -1,35 +1,36 @@
 {
-    "name": "showdropper",
-    "version": "0.0.0",
-    "private": true,
-    "scripts": {
-        "start": "node server.js"
-    },
-    "dependencies": {
-        "async": "^2.4.0",
-        "bcryptjs": "^2.4.3",
-        "body-parser": "~1.17.1",
-        "cookie-parser": "~1.4.3",
-        "debug": "~2.6.3",
-        "express": "~4.15.2",
-        "express-session": "^1.15.2",
-        "jade": "~1.11.0",
-        "lodash": "^4.17.4",
-        "mongoose": "^4.9.8",
-        "morgan": "~1.8.1",
-        "passport": "^0.3.2",
-        "passport-local": "^1.0.0",
-        "request": "^2.81.0",
-        "xml2js": "^0.4.17"
-    },
-    "devDependencies": {
-        "gulp": "^3.9.1",
-        "gulp-angular-templatecache": "^2.0.0",
-        "gulp-concat": "^2.6.1",
-        "gulp-csso": "^3.0.0",
-        "gulp-plumber": "^1.1.0",
-        "gulp-sass": "^3.1.0",
-        "gulp-uglify": "^2.1.2",
-        "gulp-uncss": "^1.0.6"
-    }
+  "name": "showdropper",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "agenda": "^0.9.1",
+    "async": "^2.4.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "express-session": "^1.15.2",
+    "jade": "~1.11.0",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.9.8",
+    "morgan": "~1.8.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "request": "^2.81.0",
+    "xml2js": "^0.4.17"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^2.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^3.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^2.1.2",
+    "gulp-uncss": "^1.0.6"
+  }
 }
