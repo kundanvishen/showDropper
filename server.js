@@ -5,7 +5,7 @@
  * 
  */
 
-var CONFIG = require('./config.local.json');
+var CONFIG = require('./config.json');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
