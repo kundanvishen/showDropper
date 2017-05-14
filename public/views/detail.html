@@ -46,6 +46,7 @@
             <span class="glyphicon glyphicon-play"></span> Episodes
         </div>
         <div class="panel-body">
+            {{episodes}}
             <div class="episode" ng-repeat="episode in show.episodes">
                 <h4>{{episode.episodeName}}
                     <small>Season {{episode.season}}, Episode {{episode.episodeNumber}}</small>

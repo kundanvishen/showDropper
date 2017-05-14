@@ -1,5 +1,5 @@
 angular.module('MyApp')
-    .factory('Subscriptions', ['$http',
+    .factory('Subscription', ['$http',
         function($http) {
             return {
                 subscribe: function(show, user) {

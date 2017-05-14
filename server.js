@@ -185,17 +185,17 @@ app.post('/api/shows', function(req, res, next) {
     var seriesName = req.body.showName
         .toLowerCase()
         .replace(/ /g, '_')
-        .replace(/[^\W-]+/g, '');
+        .replace(/[^\w-]+/g, '');
 
     async.waterfall([
         function(callback) {
             request.get('http://thetvdb.com/api/GetSeries.php?seriesname=' + seriesName, function(error, response, body) {
                 if (error) return next(error);
                 parser.parseString(body, function(err, result) {
-                    if (!result.data.series) {
-                        return res.send(404, { message: req.body.showName + ' was not found' });
+                    if (!result.Data.Series) {
+                        return res.send(404, { message: req.body.showName + ' was not found..' });
                     }
-                    var seriesId = result.data.series.seriesid || result.data.series[0].seriesid;
+                    var seriesId = result.Data.Series.seriesid || result.Data.Series[0].seriesid;
                     callback(err, seriesId);
                 });
             });
@@ -204,30 +204,31 @@ app.post('/api/shows', function(req, res, next) {
             request.get('http://thetvdb.com/api/' + apiKey + '/series/' + seriesId + '/all/en.xml', function(error, response, body) {
                 if (error) return next(error);
                 parser.parseString(body, function(err, result) {
-                    var series = result.data.series;
-                    var episodes = result.data.episode;
+
+                    var series = result.Data.Series;
+                    var episodes = result.Data.Episode;
                     var show = new Show({
                         _id: series.id,
-                        name: series.seriesname,
-                        airsDayOfWeek: series.airs_time,
-                        firstAired: series.firstaired,
-                        genre: series.genre.split('|').filter(Boolean),
-                        network: series.network,
-                        overview: series.overview,
-                        rating: series.rating,
-                        ratingCount: series.ratingcount,
-                        runtime: series.runtime,
-                        status: series.status,
+                        name: series.Seriesname,
+                        airsDayOfWeek: series.Airs_Time,
+                        firstAired: series.FirstAired,
+                        genre: series.Genre.split('|').filter(Boolean),
+                        network: series.Network,
+                        overview: series.Overview,
+                        rating: series.Rating,
+                        ratingCount: series.RatingCount,
+                        runtime: series.Runtime,
+                        status: series.Status,
                         poster: series.poster,
                         episodes: []
                     });
                     _.each(episodes, function(episode) {
                         show.episodes.push({
-                            season: episode.seasonnumber,
-                            episodeNumber: episode.episodenumber,
-                            episodeName: episode.episodename,
-                            firstAired: episode.firstaired,
-                            overview: episode.overview
+                            season: episode.SeasonNumber,
+                            episodeNumber: episode.EpisodeNumber,
+                            episodeName: episode.EpisodeName,
+                            firstAired: episode.FirstAired,
+                            overview: episode.Overview
                         });
                     });
                     callback(err, show);
