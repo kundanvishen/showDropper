@@ -21,7 +21,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var _ = require('lodash');
 
-var mongoConnectionString = CONFIG.MONGO_CONNECTION_STRING;
+var mongoConnectionString = process.env.MONGO_CONNECTION_STRING;
 var agenda = require('agenda')({ db: { address: mongoConnectionString } });
 
 var showSchema = new mongoose.Schema({
@@ -179,7 +179,7 @@ app.get('/api/shows/:id', function(req, res, next) {
 
 // add new TV show to the database
 app.post('/api/shows', function(req, res, next) {
-    var apiKey = CONFIG.TVDB_API_KEY;
+    var apiKey = process.env.TVDB_API_KEY;
     var parser = xml2js.Parser({
         explicitArray: false,
         normalizeThings: true
