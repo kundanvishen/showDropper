@@ -25,7 +25,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var _ = require('lodash');
 var agenda = require('agenda')({ db: { address: mongoConnectionString } });
 var sugar = require('sugar');
-var nodemailer = require('nodemailer');
+// var nodemailer = require('nodemailer');
 
 var showSchema = new mongoose.Schema({
     _id: Number,
@@ -113,37 +113,37 @@ function ensureAuthenticated(req, res, next) {
 // mongoose.connect('localhost');
 mongoose.connect(mongoConnectionString);
 
-// define agenda to send email alert to users
-agenda.define('send email alert', function(job, done) {
-    Show.findOne({ name: job.attrs.data }).populate('subscribers').exec(function(err, show) {
-        var emails = show.subscribers.map(function(user) {
-            return user.email;
-        });
+// // define agenda to send email alert to users
+// agenda.define('send email alert', function(job, done) {
+//     Show.findOne({ name: job.attrs.data }).populate('subscribers').exec(function(err, show) {
+//         var emails = show.subscribers.map(function(user) {
+//             return user.email;
+//         });
 
-        var upcomingEpisode = show.episodes.filter(function(episode) {
-            return new Date(episode.firstAired) > new Date();
-        })[0];
+//         var upcomingEpisode = show.episodes.filter(function(episode) {
+//             return new Date(episode.firstAired) > new Date();
+//         })[0];
 
-        var smtpTransport = nodemailer.createTransport('SMTP', {
-            service: 'SendGrid',
-            auth: { user: 'hslogin', pass: 'hspassword00' }
-        });
+//         var smtpTransport = nodemailer.createTransport('SMTP', {
+//             service: 'SendGrid',
+//             auth: { user: 'hslogin', pass: 'hspassword00' }
+//         });
 
-        var mailOptions = {
-            from: 'Fred Foo ✔ <foo@blurdybloop.com>',
-            to: emails.join(','),
-            subject: show.name + ' is starting soon!',
-            text: show.name + ' starts in less than 2 hours on ' + show.network + '.\n\n' +
-                'Episode ' + upcomingEpisode.episodeNumber + ' Overview\n\n' + upcomingEpisode.overview
-        };
+//         var mailOptions = {
+//             from: 'Fred Foo ✔ <foo@blurdybloop.com>',
+//             to: emails.join(','),
+//             subject: show.name + ' is starting soon!',
+//             text: show.name + ' starts in less than 2 hours on ' + show.network + '.\n\n' +
+//                 'Episode ' + upcomingEpisode.episodeNumber + ' Overview\n\n' + upcomingEpisode.overview
+//         };
 
-        smtpTransport.sendMail(mailOptions, function(error, response) {
-            console.log('Message sent: ' + response.message);
-            smtpTransport.close();
-            done();
-        });
-    });
-});
+//         smtpTransport.sendMail(mailOptions, function(error, response) {
+//             console.log('Message sent: ' + response.message);
+//             smtpTransport.close();
+//             done();
+//         });
+//     });
+// });
 
 agenda.start();
 
